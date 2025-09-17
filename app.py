@@ -48,7 +48,7 @@ def get_secret(*keys, default=""):
 
 
 # ====== OPENAI (IA) — vía secrets ======
-OPENAI_API_KEY = get_secret("openai", "api_key")
+OPENAI_API_KEY = get_secret("openai", "api_key") or get_secret("OPENAI_API_KEY")
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY or ""
 
 USE_NEW_OPENAI = False
@@ -64,12 +64,14 @@ except Exception:
     except Exception:
         openai = None
 
+
 # =========================
 # CONFIG / CREDENTIALS — ALIEXPRESS (dejado igual)
 # =========================
-APP_KEY      = (get_secret("ae", "app_key").strip())
-APP_SECRET   = (get_secret("ae", "app_secret").strip())
-REDIRECT_URI = (get_secret("ae", "redirect_uri").strip())
+APP_KEY      = (get_secret("ae", "app_key")     or get_secret("AE_APP_KEY", default="")).strip()
+APP_SECRET   = (get_secret("ae", "app_secret")  or get_secret("AE_APP_SECRET", default="")).strip()
+REDIRECT_URI = (get_secret("ae", "redirect_uri")or get_secret("AE_REDIRECT_URI", default="")).strip()
+
 
 AUTH_BASE = "https://api-sg.aliexpress.com/oauth/authorize"
 SYNC_URL  = "https://api-sg.aliexpress.com/sync"
