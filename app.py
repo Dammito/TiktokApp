@@ -23,10 +23,36 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from PIL import Image, ImageOps
 
-# ====== OPENAI (IA) — (dejado tal cual nos diste) ======
-OPENAI_API_KEY = "tu_clave"  #clave de OPEN AI
+
+
+# ==== Secrets helper (Streamlit Cloud + local .streamlit/secrets.toml) ====
+def get_secret(*keys, default=""):
+    """
+    Busca primero en st.secrets con claves anidadas (p.ej. get_secret('ae','app_key')),
+    y si no existe, cae a variables de entorno (AE_APP_KEY, OPENAI_API_KEY, etc.).
+    """
+    try:
+        cur = st.secrets
+        for k in keys:
+            if isinstance(cur, dict) and k in cur:
+                cur = cur[k]
+            else:
+                cur = None
+                break
+        if isinstance(cur, (str, int, float)):
+            return str(cur)
+    except Exception:
+        pass
+    env_key = "_".join(keys).upper()
+    return os.getenv(env_key, default)
+
+
+# ====== OPENAI (IA) — vía secrets ======
+OPENAI_API_KEY = get_secret("openai", "api_key") or get_secret("OPENAI_API_KEY")
+os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY or ""
 
 USE_NEW_OPENAI = False
+client = None
 try:
     from openai import OpenAI
     client = OpenAI(api_key=OPENAI_API_KEY)
@@ -41,9 +67,9 @@ except Exception:
 # =========================
 # CONFIG / CREDENTIALS — ALIEXPRESS (dejado igual)
 # =========================
-APP_KEY      = os.getenv("AE_APP_KEY", "tu_clave").strip()
-APP_SECRET   = os.getenv("AE_APP_SECRET", "tu_clave").strip()
-REDIRECT_URI = os.getenv("AE_REDIRECT_URI", "tu_clave").strip()
+APP_KEY      = (get_secret("ae", "app_key")     or get_secret("AE_APP_KEY", default="")).strip()
+APP_SECRET   = (get_secret("ae", "app_secret")  or get_secret("AE_APP_SECRET", default="")).strip()
+REDIRECT_URI = (get_secret("ae", "redirect_uri")or get_secret("AE_REDIRECT_URI", default="")).strip()
 
 AUTH_BASE = "https://api-sg.aliexpress.com/oauth/authorize"
 SYNC_URL  = "https://api-sg.aliexpress.com/sync"
