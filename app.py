@@ -67,9 +67,9 @@ except Exception:
 # =========================
 # CONFIG / CREDENTIALS — ALIEXPRESS (dejado igual)
 # =========================
-APP_KEY      = (get_secret("ae", "app_key").strip()
-APP_SECRET   = (get_secret("ae", "app_secret").strip()
-REDIRECT_URI = (get_secret("ae", "redirect_uri").strip()
+APP_KEY      = (get_secret("ae", "app_key").strip())
+APP_SECRET   = (get_secret("ae", "app_secret").strip())
+REDIRECT_URI = (get_secret("ae", "redirect_uri").strip())
 
 AUTH_BASE = "https://api-sg.aliexpress.com/oauth/authorize"
 SYNC_URL  = "https://api-sg.aliexpress.com/sync"
