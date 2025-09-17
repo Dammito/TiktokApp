@@ -24,7 +24,7 @@ from urllib3.util.retry import Retry
 from PIL import Image, ImageOps
 
 # ====== OPENAI (IA) — (dejado tal cual nos diste) ======
-OPENAI_API_KEY = "   "  #clave de OPEN AI
+OPENAI_API_KEY = "tu_clave"  #clave de OPEN AI
 
 USE_NEW_OPENAI = False
 try:
@@ -41,9 +41,9 @@ except Exception:
 # =========================
 # CONFIG / CREDENTIALS — ALIEXPRESS (dejado igual)
 # =========================
-APP_KEY      = os.getenv("AE_APP_KEY", "").strip()
-APP_SECRET   = os.getenv("AE_APP_SECRET", "").strip()
-REDIRECT_URI = os.getenv("AE_REDIRECT_URI", "").strip()
+APP_KEY      = os.getenv("AE_APP_KEY", "tu_clave").strip()
+APP_SECRET   = os.getenv("AE_APP_SECRET", "tu_clave").strip()
+REDIRECT_URI = os.getenv("AE_REDIRECT_URI", "tu_clave").strip()
 
 AUTH_BASE = "https://api-sg.aliexpress.com/oauth/authorize"
 SYNC_URL  = "https://api-sg.aliexpress.com/sync"
