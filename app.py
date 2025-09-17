@@ -601,6 +601,8 @@ st.title("Chef’s Aura — AliExpress → Builder TikTok (IA)")
 
 with st.sidebar:
     st.subheader("AliExpress OpenService")
+    ok = bool(OPENAI_API_KEY and APP_KEY and APP_SECRET and REDIRECT_URI)
+    st.caption("🔒 Secrets cargados" if ok else "⚠️ Faltan secrets (revisa Settings → Secrets)")
     st.write("**APP_KEY:**", APP_KEY or "—")
     st.write("**Redirect URI:**", REDIRECT_URI or "—")
 
