@@ -603,8 +603,6 @@ with st.sidebar:
     st.subheader("AliExpress OpenService")
     ok = bool(OPENAI_API_KEY and APP_KEY and APP_SECRET and REDIRECT_URI)
     st.caption("🔒 Secrets cargados" if ok else "⚠️ Faltan secrets (revisa Settings → Secrets)")
-    st.write("**APP_KEY:**", APP_KEY or "—")
-    st.write("**Redirect URI:**", REDIRECT_URI or "—")
 
     col_a1, col_a2 = st.columns(2)
     with col_a1:
