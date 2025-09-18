@@ -22,6 +22,7 @@ from datetime import datetime, timedelta, timezone
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from PIL import Image, ImageOps
+from openai import OpenAI
 
 
 
