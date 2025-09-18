@@ -1,0 +1,7 @@
+streamlit
+pandas
+openpyxl
+xlsxwriter
+requests
+pillow
+openai==1.*   # (ver punto 2)
